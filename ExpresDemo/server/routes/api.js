@@ -31,23 +31,33 @@ router.get('/showFriends', (req, res) => {
 
 
 /* POSTT api with parameters. */
-router.post('/product', (req, res) => {
+router.post('/products', (req, res) => {
   console.log(req.body);
   let product = req.body;
-  res.send('Hello '+ product.description);
+  console.log(product.code);
+  var sql = "INSERT INTO product_details (code, description, price) VALUES ('"+product.code+"','"+ product.description +"',"+product.price+")";
+  dbConfig.getDB().query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    res.send("Product Saved Successfully...!");
+  });  
 });
 
 router.get('/products', (req,res) => {  
-  
-  dbConfig.getDB().connect(function(err) {
-    if (err) throw err;
-    console.log("Db Connected...");
     dbConfig.getDB().query("SELECT * FROM product_details", function (err, result, fields) {
       if (err) throw err;
       console.log(result);
       res.send(result);
-    });
-  });
+    });  
+});
+
+router.get('/products/:id', (req,res) => {  
+  let productId = req.params.id;
+  dbConfig.getDB().query("SELECT * FROM product_details where product_id = "+productId, function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
+  });  
 });
 
 module.exports = router;
