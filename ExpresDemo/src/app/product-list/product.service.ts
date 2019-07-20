@@ -14,4 +14,8 @@ export class ProductService {
     getProductList():Observable<Product[]>{
         return this.httpClient.get<Product[]>(this.appUrl);
     }
+
+    saveProduct(product: Product):Observable<any>{
+        return this.httpClient.post<any>(this.appUrl,product);
+    }
 }
