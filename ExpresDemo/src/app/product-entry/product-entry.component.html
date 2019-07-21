@@ -1,6 +1,7 @@
 <div class="alert alert-success" *ngIf="message !== ''">
   {{message}}
 </div>
+{{newProduct | json}}
 <form #f=ngForm (ngSubmit)="save(f)">
   <div class="row form-group">
     <div class="col-sm-3">

@@ -26,6 +26,22 @@ export class ProductListComponent implements OnInit {
     )
   }
 
+  edit(productId : number):void{
+    this.router.navigate(['editProduct',productId]);
+  }
+
+  delete(productId : number):void{
+    let confirmMsg = confirm("Are you sure want to delete?");
+    if(confirmMsg){
+      this.productService.deleteProductById(productId).subscribe(
+        (response)=>{
+          alert("Product Deleted Successfully...!");
+          this.getProductList();
+        }
+      )
+    }
+  }
+
   add():void {
     this.router.navigate(['addProduct']);
   }

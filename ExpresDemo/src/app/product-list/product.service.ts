@@ -18,4 +18,12 @@ export class ProductService {
     saveProduct(product: Product):Observable<any>{
         return this.httpClient.post<any>(this.appUrl,product);
     }
+
+    getProductById(productId : number):Observable<Product>{
+        return this.httpClient.get<Product>(this.appUrl+"/"+productId);
+    }
+
+    deleteProductById(productId : number):Observable<any>{
+        return this.httpClient.delete<any>(this.appUrl+"/"+productId);
+    }
 }

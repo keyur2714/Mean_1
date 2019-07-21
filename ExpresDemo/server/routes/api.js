@@ -39,7 +39,7 @@ router.post('/products', (req, res) => {
   dbConfig.getDB().query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
-    res.send("Product Saved Successfully...!");
+    res.send(result);
   });  
 });
 
@@ -54,6 +54,15 @@ router.get('/products', (req,res) => {
 router.get('/products/:id', (req,res) => {  
   let productId = req.params.id;
   dbConfig.getDB().query("SELECT * FROM product_details where product_id = "+productId, function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
+  });  
+});
+
+router.delete('/products/:id', (req,res) => {  
+  let productId = req.params.id;
+  dbConfig.getDB().query("delete FROM product_details where product_id = "+productId, function (err, result, fields) {
     if (err) throw err;
     console.log(result);
     res.send(result);
