@@ -19,6 +19,10 @@ export class ProductService {
         return this.httpClient.post<any>(this.appUrl,product);
     }
 
+    updateProduct(product: Product):Observable<any>{
+        return this.httpClient.put<any>(this.appUrl+"/"+product.product_id,product);
+    }
+
     getProductById(productId : number):Observable<Product>{
         return this.httpClient.get<Product>(this.appUrl+"/"+productId);
     }

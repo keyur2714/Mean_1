@@ -21,8 +21,12 @@ export class ProductEntryComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(
       (params)=>{
-        this.editId = params.id;
-        this.getProductById(this.editId);
+        if(params.id !== undefined){
+          this.editId = params.id;
+          this.getProductById(this.editId);
+        }else{
+          this.editId = 0;
+        }        
       }
     )
   }
@@ -30,7 +34,7 @@ export class ProductEntryComponent implements OnInit {
   getProductById(productId):void{
     this.productService.getProductById(productId).subscribe(
       (product: Product)=>{
-        this.newProduct = product;
+        this.newProduct = product[0];
       }
     )
   }
@@ -40,6 +44,16 @@ export class ProductEntryComponent implements OnInit {
       (data)=>{
         console.log(data);
         this.message = "Product Saved Successfully...!";
+      }
+    )
+  }
+
+  update():void{
+    this.productService.updateProduct(this.newProduct).subscribe(
+      (data)=>{
+        console.log(data);
+        this.message = "Product Updated Successfully...!";
+        this.editId = 0;
       }
     )
   }

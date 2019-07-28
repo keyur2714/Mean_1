@@ -1,7 +1,6 @@
 <div class="alert alert-success" *ngIf="message !== ''">
   {{message}}
 </div>
-{{newProduct | json}}
 <form #f=ngForm (ngSubmit)="save(f)">
   <div class="row form-group">
     <div class="col-sm-3">
@@ -29,7 +28,8 @@
   </div>
   <div class="row form-group">
     <div class="col-sm-3">
-      <button type="submit" class="btn btn-info">Save</button>
+      <button type="submit" class="btn btn-info" *ngIf="editId === 0">Save</button>
+      <button type="button" class="btn btn-info" *ngIf="editId !== 0" (click)="update()">Update</button>
     </div>
     <div class="col-sm-3">
       <button type="button" class="btn btn-secondary" (click)="back()">Back</button>

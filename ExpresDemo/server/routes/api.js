@@ -30,12 +30,26 @@ router.get('/showFriends', (req, res) => {
 });
 
 
-/* POSTT api with parameters. */
+/* POST api with parameters. */
 router.post('/products', (req, res) => {
   console.log(req.body);
   let product = req.body;
   console.log(product.code);
   var sql = "INSERT INTO product_details (code, description, price) VALUES ('"+product.code+"','"+ product.description +"',"+product.price+")";
+  dbConfig.getDB().query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
+  });  
+});
+
+/* POST api with parameters. */
+router.put('/products/:id', (req, res) => {
+  console.log(req.body);
+  let productId = parseInt(req.params.id);
+  let product = req.body;
+  console.log(product.code);
+  var sql = "update product_details set code = '"+product.code+"',description='"+product.description+"',price="+product.price+" where product_id="+productId;
   dbConfig.getDB().query(sql, function (err, result) {
     if (err) throw err;
     console.log(result);
