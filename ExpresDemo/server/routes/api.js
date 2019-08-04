@@ -43,7 +43,7 @@ router.post('/products', (req, res) => {
   });  
 });
 
-/* POST api with parameters. */
+/* PUT api with parameters. */
 router.put('/products/:id', (req, res) => {
   console.log(req.body);
   let productId = parseInt(req.params.id);

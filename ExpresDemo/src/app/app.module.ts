@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductService } from './product-list/product.service';
 import { ProductEntryComponent } from './product-entry/product-entry.component';
+import { StudentListComponent } from './student-list/student-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
-    ProductEntryComponent
+    ProductEntryComponent,
+    StudentListComponent
   ],
   imports: [
     BrowserModule,
